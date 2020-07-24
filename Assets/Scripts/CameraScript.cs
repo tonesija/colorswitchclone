@@ -14,7 +14,7 @@ public class CameraScript : MonoBehaviour
     void Update()
     {
         if(playerTransform != null && playerTransform.position.y + playerOffset > transform.position.y){
-            transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + playerOffset, -10f);
+            transform.position = new Vector3(playerTransform.position.x, playerTransform.position.y + playerOffset, transform.position.z);
         }
     }
 
