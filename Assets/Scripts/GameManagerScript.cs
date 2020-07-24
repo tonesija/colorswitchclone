@@ -29,7 +29,7 @@ public class GameManagerScript : MonoBehaviour
     void Update(){
         float playerY = player.transform.position.y;
         if(playerY > aliveClusters[aliveClusters.Length - 1].transform.position.y){
-            AddCluster(clustersScript.SpawnCluster(1, playerY + clusterDistance));
+            AddCluster(clustersScript.SpawnCluster(difficulty, playerY + clusterDistance));
         }
     }
 

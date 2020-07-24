@@ -8,6 +8,8 @@ TagManager:
   - y
   - v
   - p
+  - switch
+  - score
   layers:
   - Default
   - TransparentFX
