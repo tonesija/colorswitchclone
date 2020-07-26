@@ -28,6 +28,7 @@ public class GameManagerScript : MonoBehaviour
         score = 0;
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerScript>().OnScorePickup += IncreaseScore; //subscribe IncreaseScore() on player pickup score event
+        player.GetComponent<PlayerScript>().OnPlayerDeath += ShowGameOverUI; 
         AddCluster(clustersScript.SpawnCluster(1, 3f)); //spawn first cluster
         scoreText = GetComponentInChildren<Text>(); //get reference to scoreText child
     }
@@ -45,9 +46,13 @@ public class GameManagerScript : MonoBehaviour
         score++;
         scoreText.text = score.ToString();
         switch (score){
-            case 8:
-            case 16:
-            case 24: difficulty++; break;
+            case 5:
+            case 10:
+            case 15: difficulty++; break;
+        }
+
+        if(score > PlayerPrefs.GetInt("HighScore", 0)){
+            PlayerPrefs.SetInt("HighScore", score);
         }
     }
 
@@ -65,6 +70,17 @@ public class GameManagerScript : MonoBehaviour
         }
 
         aliveClusters[aliveClusters.Length - 1] = cluster;
+    }
+
+    // show game over ui with relevant scores
+    void ShowGameOverUI(){
+
+        Transform gameOverUI = transform.Find("GameOverUI");
+
+        gameOverUI.transform.Find("ScoreText").GetComponent<Text>().text = "SCORE: " + score.ToString();
+        gameOverUI.transform.Find("HighScoreText").GetComponent<Text>().text = "HIGH SCORE: " + PlayerPrefs.GetInt("HighScore", 0).ToString();
+
+        gameOverUI.gameObject.SetActive(true);
     }
 
     

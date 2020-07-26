@@ -10,6 +10,9 @@ TagManager:
   - p
   - switch
   - score
+  - gameOverUI
+  - scoreText
+  - highScoreText
   layers:
   - Default
   - TransparentFX

@@ -45,10 +45,7 @@ public class PlayerScript : MonoBehaviour
 
             oldPlayerColor = playerColor;
 
-
             gameObject.GetComponent<SpriteRenderer>().color = GetColorFromString(playerColor);
-            Debug.Log(GetColorFromString(playerColor) + " " + gameObject.GetComponent<SpriteRenderer>().color);
-
         }
     }
 
