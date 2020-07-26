@@ -6,7 +6,11 @@ using System;
 public class PlayerScript : MonoBehaviour
 {
     Rigidbody2D rb;
+
+    ParticleSystem ps;
     public float jumpForce;
+
+    public float gravityScale;
 
     public event Action OnScorePickup;  
     public event Action OnPlayerDeath; 
@@ -16,6 +20,10 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        rb.gravityScale = 0f;
+
+        ps = GetComponent<ParticleSystem>();
+
         string[] colors = {"y", "b", "p", "v"};
         int randomColor = UnityEngine.Random.Range(0, 4);
         
@@ -30,6 +38,7 @@ public class PlayerScript : MonoBehaviour
     {
         if(Input.GetMouseButtonDown(0)){
             rb.velocity = new Vector2(0f, jumpForce);
+            rb.gravityScale = gravityScale;
         }
 
         if(!oldPlayerColor.Equals(playerColor)){
@@ -49,6 +58,7 @@ public class PlayerScript : MonoBehaviour
         
         if (tag.Equals("score")){
             if(OnScorePickup != null) OnScorePickup();
+            PlayerPickupScore();
         }else if (tag.Equals("switch")){
             
             string[] colors = {"y", "b", "p", "v"};
@@ -62,6 +72,7 @@ public class PlayerScript : MonoBehaviour
 
         }else if(!tag.Equals(playerColor)){
             if(OnPlayerDeath != null) OnPlayerDeath();
+            PlayerDied();
             Time.timeScale = 0.0f;
             return;
         }
@@ -87,6 +98,18 @@ public class PlayerScript : MonoBehaviour
         }
 
         return returnColor;
+    }
+
+    void PlayerDied(){
+        
+    }
+
+    void PlayerPickupScore(){
+        ParticleSystem.EmitParams emitParams = new ParticleSystem.EmitParams();
+        emitParams.startColor = new Color(1, 1, 1);
+        emitParams.startSize = 0.12f;
+        
+        ps.Emit(emitParams, 12);
     }
 
     

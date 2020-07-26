@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManagerScript : MonoBehaviour
 {
@@ -16,16 +17,22 @@ public class GameManagerScript : MonoBehaviour
 
     GameObject player;
 
+    Text scoreText;
+
+    
+
     void Start()
     {
         aliveClusters = new GameObject[3];
         difficulty = 1;
         score = 0;
         player = GameObject.FindGameObjectWithTag("Player");
-        player.GetComponent<PlayerScript>().OnScorePickup += IncreaseScore;
-        AddCluster(clustersScript.SpawnCluster(1, 3f));
+        player.GetComponent<PlayerScript>().OnScorePickup += IncreaseScore; //subscribe IncreaseScore() on player pickup score event
+        AddCluster(clustersScript.SpawnCluster(1, 3f)); //spawn first cluster
+        scoreText = GetComponentInChildren<Text>(); //get reference to scoreText child
     }
 
+    //adds clusters if player has reached certain height
     void Update(){
         float playerY = player.transform.position.y;
         if(playerY > aliveClusters[aliveClusters.Length - 1].transform.position.y){
@@ -33,8 +40,10 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    //increase score and difficulty
     void IncreaseScore(){
         score++;
+        scoreText.text = score.ToString();
         switch (score){
             case 8:
             case 16:
@@ -42,6 +51,7 @@ public class GameManagerScript : MonoBehaviour
         }
     }
 
+    //add new cluster to the aliveClusters array (order)
     void AddCluster(GameObject cluster){
         if(aliveClusters[0] != null){
             print("destroying oldest cluster");
