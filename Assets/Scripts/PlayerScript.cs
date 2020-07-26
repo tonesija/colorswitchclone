@@ -109,5 +109,9 @@ public class PlayerScript : MonoBehaviour
         ps.Emit(emitParams, 12);
     }
 
+    private void OnBecameInvisible() {
+        OnPlayerDeath();
+    }
+
     
 }
