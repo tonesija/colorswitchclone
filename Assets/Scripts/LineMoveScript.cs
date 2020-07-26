@@ -18,7 +18,7 @@ public class LineMoveScript : MonoBehaviour
     {
         transform.Translate(-1.0f * linearSpeed * Time.deltaTime, 0.0f, 0.0f);
         
-        if(Mathf.Abs(transform.position.x) > 4 * 3.4f * transform.localScale.x){
+        if(Mathf.Abs(transform.position.x) > 4 * 3.4f * Mathf.Abs(transform.localScale.x)){
             transform.position = new Vector3(0.0f, transform.position.y, 0.0f);
         }
     }
