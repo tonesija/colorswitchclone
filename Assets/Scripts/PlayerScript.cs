@@ -67,7 +67,7 @@ public class PlayerScript : MonoBehaviour
                 playerColor = colors[randomColor];
             }
 
-        }else if(!tag.Equals(playerColor)){
+        }else if(!tag.Equals(playerColor) || tag.Equals("floor")){
             if(OnPlayerDeath != null) OnPlayerDeath();
             PlayerDied();
             Time.timeScale = 0.0f;
