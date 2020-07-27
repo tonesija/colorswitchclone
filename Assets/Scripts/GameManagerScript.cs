@@ -29,7 +29,7 @@ public class GameManagerScript : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         player.GetComponent<PlayerScript>().OnScorePickup += IncreaseScore; //subscribe IncreaseScore() on player pickup score event
         player.GetComponent<PlayerScript>().OnPlayerDeath += ShowGameOverUI; 
-        AddCluster(clustersScript.SpawnCluster(4, 3f)); //spawn first cluster
+        AddCluster(clustersScript.SpawnCluster(0, 3f)); //spawn first cluster
         scoreText = GetComponentInChildren<Text>(); //get reference to scoreText child
     }
 
@@ -75,7 +75,7 @@ public class GameManagerScript : MonoBehaviour
         if(playerY + clusterDistance > lastCluster.transform.position.y){
             //cluster distance treba biti switch.y + neki broj
             float switchY = lastCluster.transform.GetChild(lastCluster.transform.childCount - 1).transform.position.y;
-            AddCluster(clustersScript.SpawnCluster(4, switchY + clusterDistance));
+            AddCluster(clustersScript.SpawnCluster(difficulty, switchY + clusterDistance));
         }
     }
 
