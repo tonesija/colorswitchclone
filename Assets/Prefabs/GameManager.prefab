@@ -702,7 +702,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   clustersScript: {fileID: 7319224239968071177, guid: c50f5889ebf578d7a8d08191516b18ac,
     type: 3}
-  clusterDistance: 8
+  clusterDistance: 3
 --- !u!223 &1949233078928341812
 Canvas:
   m_ObjectHideFlags: 0

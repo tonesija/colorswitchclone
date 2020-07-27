@@ -110,7 +110,8 @@ public class PlayerScript : MonoBehaviour
     }
 
     private void OnBecameInvisible() {
-        OnPlayerDeath();
+        print("INVISIBLE");
+        //OnPlayerDeath();
     }
 
     
